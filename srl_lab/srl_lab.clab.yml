@@ -1,0 +1,37 @@
+name: srl-lab
+
+topology:
+  nodes:
+    # Switches
+    spine1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.3.3
+      startup-config: startup/spine1_startup.txt
+    leaf1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.3.3
+      startup-config: startup/leaf1_startup.txt
+    leaf2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.3.3
+      startup-config: startup/leaf2_startup.txt
+
+  # Linux Hosts
+    host1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.10.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.10.254 dev eth1
+    host2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.20.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.20.254 dev eth1
+
+  links:
+    - endpoints: [spine1:ethernet-1/1, leaf1:ethernet-1/1]
+    - endpoints: [spine1:ethernet-1/2, leaf2:ethernet-1/1]
+    - endpoints: [leaf1:ethernet-1/2, host1:eth1]
+    - endpoints: [leaf2:ethernet-1/2, host2:eth1]

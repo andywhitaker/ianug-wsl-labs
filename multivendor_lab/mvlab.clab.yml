@@ -1,0 +1,43 @@
+name: mvlab
+
+topology:
+  kinds:
+    arista_ceos:
+      env:
+        INTFTYPE: et
+
+  nodes:
+    srl_spine:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:25.3.3
+      startup-config: srl_spine/srl_spine-startup.txt
+    arista_leaf:
+      kind: arista_ceos
+      image: ceos:4.34.1F
+      startup-config: arista_leaf/arista_leaf-startup.txt
+    frr_leaf:
+      kind: linux
+      image: quay.io/frrouting/frr:10.3.1
+      binds:
+        - frr_leaf/frr:/etc/frr
+
+  # Linux Hosts
+    host1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.10.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.10.254 dev eth1
+    host2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.20.1/24 dev eth1
+        - ip route add 192.168.0.0/16 via 192.168.20.254 dev eth1
+
+
+  links:
+    - endpoints: [srl_spine:ethernet-1/1, arista_leaf:et1]
+    - endpoints: [srl_spine:ethernet-1/2, frr_leaf:eth1]
+    - endpoints: [arista_leaf:et2, host1:eth1]
+    - endpoints: [frr_leaf:eth2, host2:eth1]

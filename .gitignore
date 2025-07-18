@@ -1,0 +1,10 @@
+*.key
+*.log
+.*.clab.y*ml.bak
+
+
+srl-telemetry-lab/configs/syslog/log/**
+srl-telemetry-lab/configs/syslog/syslog-ng.ctl
+srl-telemetry-lab/configs/syslog/syslog-ng.persist
+srl-telemetry-lab/configs/syslog/syslog-ng.pid
+srl-telemetry-lab/clab-st

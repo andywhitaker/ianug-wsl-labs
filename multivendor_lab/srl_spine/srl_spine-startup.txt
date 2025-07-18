@@ -1,0 +1,24 @@
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 address 10.1.10.10/24
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.2.10.10/24
+set / interface system0 subinterface 0 ipv4 admin-state enable
+set / interface system0 subinterface 0 ipv4 address 10.10.10.10/32
+
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+set / network-instance default interface system0.0
+set / network-instance default protocols bgp admin-state enable
+set / network-instance default protocols bgp autonomous-system 100
+set / network-instance default protocols bgp router-id 100.100.100.100
+set / network-instance default protocols bgp ebgp-default-policy import-reject-all false
+set / network-instance default protocols bgp ebgp-default-policy export-reject-all false
+set / network-instance default protocols bgp afi-safi ipv4-unicast admin-state enable
+set / network-instance default protocols bgp group leafs admin-state enable
+set / network-instance default protocols bgp group leafs afi-safi ipv4-unicast
+set / network-instance default protocols bgp neighbor 10.1.10.1 peer-as 10
+set / network-instance default protocols bgp neighbor 10.1.10.1 peer-group leafs
+set / network-instance default protocols bgp neighbor 10.2.10.2 peer-as 20
+set / network-instance default protocols bgp neighbor 10.2.10.2 peer-group leafs
