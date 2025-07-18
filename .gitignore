@@ -1,6 +1,6 @@
 *.key
 *.log
-.*.clab.y*ml.bak
+*.clab.y*ml.bak
 
 
 srl-telemetry-lab/configs/syslog/log/**

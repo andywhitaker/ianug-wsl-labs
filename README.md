@@ -1,10 +1,11 @@
 # (IA)NUG Summer 2025 Containerlab Demos
-This repository contains the demos used for the (IA)NUG Summer 2025 event. The repository contains four labs:
+This repository contains the demos used for the (IA)NUG Summer 2025 event. The repository contains five labs:
 
 1. [srl_lab](#srl-lab)
 2. [multivendor_lab](#multivendor-lab)
 3. [frr_lab](#frr-lab)
 4. [srl-telemetry-lab](#srl-telemetry-lab)
+5. [netlab-ibgp-over-ospf](#netlab-ibgp-over-ospf)
 
 Further documentation for Containerlab may be found on the [official Containerlab website](https://containerlab.dev/).
 
@@ -143,3 +144,18 @@ Displayed 3 routes and 3 total paths
 This lab is the same SRL Telemetry lab found [here](https://github.com/srl-labs/srl-telemetry-lab)
 included as a great example of combining containers available in the larger Docker container
 ecosystem with your labs.
+
+## Netlab iBGP over OSPF
+This lab shows how Netlab can reduce boilerplate code when deploying labs.
+(**This lab requires Netlab to be installed** - refer to the
+[offical Netlab documentation](https://netlab.tools) for installation instructions.)
+
+The lab leverages all FRR routing nodes and linux hosts. There is one FRR iBGP
+route-reflector and 12 FRR routing nodes peering with it in a hub-and-spoke
+fashion. OSPF is used to share link and loopback addresses and iBGP peering occurs
+between the loopbacks. Each RR-client router has a linux host connected for testing and
+validation.
+
+Netlab has a large repository of excellent examples at
+[netlab-examples](https://github.com/ipspace/netlab-examples) well worth checking out
+as well!

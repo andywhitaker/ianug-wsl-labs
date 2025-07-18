@@ -1,0 +1,45 @@
+---
+defaults.device: frr
+provider: clab
+
+module: [bgp, ospf]
+bgp.as: 65000
+
+groups:
+  rrs:
+    members: [ rr ]
+    id: 1
+    bgp.rr: true
+  hosts:
+    members: [ h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12 ]
+    device: linux
+
+nodes: [rr, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, h1, h2, h3, h4, h5, h6, h7, h8, h9, h10, h11, h12]
+
+links:
+  [
+    rr-s1,
+    rr-s2,
+    rr-s3,
+    rr-s4,
+    rr-s5,
+    rr-s6,
+    rr-s7,
+    rr-s8,
+    rr-s9,
+    rr-s10,
+    rr-s11,
+    rr-s12,
+    s1-h1,
+    s2-h2,
+    s3-h3,
+    s4-h4,
+    s5-h5,
+    s6-h6,
+    s7-h7,
+    s8-h8,
+    s9-h9,
+    s10-h10,
+    s11-h11,
+    s12-h12
+  ]
