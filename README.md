@@ -1,5 +1,5 @@
 # (IA)NUG Summer 2025 Containerlab Demos
-This repository contains the demos used for the (IA)NUG Summer 2025 event. The repository contains five labs:
+This repository contains the demos used for the (IA)NUG Summer 2025 event. The repository contains four labs:
 
 1. [srl_lab](#srl-lab)
 2. [multivendor_lab](#multivendor-lab)
